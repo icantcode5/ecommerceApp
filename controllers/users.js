@@ -4,7 +4,7 @@ module.exports = {
 	getUsers: async (request, response) => {
 		try {
 			const getUsersQuery = `SELECT * FROM users`
-			//Returns an object full of many properties, we want the data from our users table which is in the "rows" property
+			//Returns an object full of many properties, we want the data from our users table which is in the "rows" property. Our users come in an array.
 			const users = await client.query(getUsersQuery)
 
 			response.json(users.rows)
