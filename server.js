@@ -12,6 +12,7 @@ app.use(express.json())
 if (process.env.NODE_ENV === "production") {
 	app.use(express.static("./client/build"))
 }
+//comment to test dev branch
 
 //May need to connect to the client from the controller directory files as that's where we are going make requests to the postgres database from
 client.connect()
