@@ -14,7 +14,7 @@ const client = new Client({
 	user: "postgres",
 	port: 5001,
 	password: process.env.DB_PASSWORD,
-	database: "postgres",
+	database: "shop",
 })
 
 module.exports = client
