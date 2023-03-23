@@ -14,3 +14,22 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
+
+@media (max-width: 1230px){
+  .home__products{
+    /* width: 320px; */
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 965px){
+  .home__products{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 635px){
+  .home__products{
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

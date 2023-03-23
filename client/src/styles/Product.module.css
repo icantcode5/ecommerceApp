@@ -49,3 +49,58 @@
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);
   transform: scale(.95);
 }
+
+@media (max-width: 1230px){
+  .product{
+    width: 350px;
+  }
+}
+
+@media (max-width: 1115px){
+  .product{
+    width: 330px;
+  }
+}
+
+@media (max-width: 1050px){
+  .product{
+    width: 300px;
+  }
+}
+
+@media (max-width: 965px){
+  .product{
+    width: 400px;
+  }
+}
+
+@media (max-width: 848px){
+  .product{
+    width: 350px;
+  }
+}
+
+@media (max-width: 750px){
+  .product{
+    width: 300px;
+  }
+}
+
+@media (max-width: 635px){
+  .product{
+    width: 500px;
+  }
+}
+
+@media (max-width: 540px){
+  .product{
+    width: 350px;
+  }
+}
+
+@media (max-width: 400px){
+  .product{
+    width: 300px;
+  }
+}
+

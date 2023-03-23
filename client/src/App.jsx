@@ -2,7 +2,7 @@
 import {Routes, Route} from "react-router-dom"
 import { useState } from "react"
 import Home from "./pages/Home"
-import Cart from "./pages/Cart"
+import CartPage from "./pages/CartPage"
 import ProductPage from "./pages/ProductPage"
 import Navbar from "./components/Navbar"
 import Backdrop from "./components/Backdrop"
@@ -29,7 +29,7 @@ function App() {
       <Route  path = "/" element = {<Home />}/>
       <Route  path = "/products" element = {<Home />}/>
       <Route  path = "/product/:id" element = {<ProductPage />}/>
-      <Route  path = "/cart" element = {<Cart />}/>
+      <Route  path = "/cart" element = {<CartPage />}/>
     </Routes>
     </>
   )

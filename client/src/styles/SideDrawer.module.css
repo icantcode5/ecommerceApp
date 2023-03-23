@@ -19,6 +19,11 @@
   display: flex;
   flex-direction: column;
   list-style: none;
+  
+}
+
+.sidedrawer ul{
+  width: 100%;
 }
 
 .sidedrawershow li{
@@ -44,7 +49,7 @@
 
 /* Not working rn!!! */
 .sidedrawer li a:hover{
- width: 100%;
+ min-width: 100%;
  background-color: #171717;
  color: white;
 }
