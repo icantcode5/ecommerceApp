@@ -8,8 +8,75 @@
   z-index: 150;
   transform:translateX(-100%) ;
   transition: all 0.3s ease-out;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .sidedrawershow{
   transform: translateX(0);
+  display: flex;
+  flex-direction: column;
+  list-style: none;
 }
+
+.sidedrawershow li{
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.sidedrawershow li a {
+  text-decoration: none;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  padding: 1rem;
+  color: #171717;
+  text-align: center;
+  width: 100%;
+
+  /* border: solid 2px red; */
+}
+
+/* Not working rn!!! */
+.sidedrawer li a:hover{
+ width: 100%;
+ background-color: #171717;
+ color: white;
+}
+
+.sidedrawer li a span{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+}
+
+.sidedrawerbadge{
+  width: 30px;
+  min-height: 30px;
+  background-color: #171717;
+  border-radius: 50%;
+  color:white;
+  justify-content: center;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.sidedrawershow li a:hover .sidedrawerbadge{
+  background-color: white;
+  color: #171717;
+ }
+
+ @media(min-width : 960px){
+  .sidedrawer{
+    display: none;
+  }
+ }
+
+
+
