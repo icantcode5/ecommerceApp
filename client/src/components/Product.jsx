@@ -12,7 +12,7 @@ function Product(props) {
 				<p className={styles.product__description}>{props.description}</p>
 				<p className={styles.product__price}>${props.price}</p>
 
-				<Link to={`/product/${props.id}`} className={styles.product__link}>
+				<Link to={`/products/${props.id}`} className={styles.product__link}>
 					View
 				</Link>
 			</div>

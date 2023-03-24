@@ -1,17 +1,19 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { addProductToCart } from "../features/cart/cartSlice"
 import styles from "../styles/ProductPage.module.css"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 
-const ProductPage = (props) => {
+const ProductPage = () => {
 	const dispatch = useDispatch()
-	//Grab Id from URL to correctly add product to Cart
+	//Grab Id from URL to display current product's info. URL id is a string.
 	const { id } = useParams()
-	console.log(id)
 
 	const { products } = useSelector((state) => state.products)
-	console.log(products)
+
+	const product = products.filter((product) => {
+		return product.id === parseInt(id)
+	})[0]
 
 	function handleAddProductToCart() {
 		dispatch(addProductToCart())
@@ -28,22 +30,19 @@ const ProductPage = (props) => {
 				</div>
 
 				<div className={styles.leftinfo}>
-					<p className={styles.leftname}>{props.name}</p>
-					<p>Price: $4.00</p>
-					<p>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
-						impedit soluta ex placeat! Et, in.
-					</p>
+					<p className={styles.leftname}>{product.name}</p>
+					<p>${product.price}</p>
+					<p>{product.description}</p>
 				</div>
 			</div>
 
 			<div className={styles.productpageright}>
 				<div className={styles.rightinfo}>
 					<p>
-						Price: <span>$499</span>
+						Price: <span>${product.price}</span>
 					</p>
 					<p>
-						Status <span>In Stock</span>
+						Status <span>{product.instockamount ? "In Stocksss" : "None"}</span>
 					</p>
 					<p className={styles.quantity}>
 						QTY
