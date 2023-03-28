@@ -1,5 +1,6 @@
 const client = require("../config/database")
 
+//GET all products
 const getAllProducts = async (request, response) => {
 	const allProductsQuery = "SELECT * FROM products"
 
@@ -10,6 +11,8 @@ const getAllProducts = async (request, response) => {
 		console.log("Error is " + error)
 	}
 }
+
+//Get a single product
 const getProductById = async (request, response) => {
 	const id = request.params.id
 	const allProductsQuery = "SELECT * FROM products WHERE id = $1"
