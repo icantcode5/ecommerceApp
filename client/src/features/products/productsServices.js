@@ -6,8 +6,13 @@ const getAllProducts = async () => {
 	return response.data
 }
 
+const getProduct = async () => {
+	const response = await axios.get(`http://localhost:5000/products/${id}`)
+	return response.data
+}
 const productsServices = {
 	getAllProducts,
+	getProduct,
 }
 
 export default productsServices

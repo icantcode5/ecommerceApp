@@ -27,6 +27,24 @@ export const getAllProducts = createAsyncThunk(
 	}
 )
 
+//GET single product
+export const getProduct = createAsyncThunk(
+	"products/getProduct",
+	async (_, thunkAPI) => {
+		try {
+			return await productsServices.getAllProducts()
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
+			return thunkAPI.rejectWithValue(message)
+		}
+	}
+)
+
 export const productsSlice = createSlice({
 	name: "products",
 	initialState,
@@ -52,6 +70,22 @@ export const productsSlice = createSlice({
 				console.log(action.payload)
 			})
 			.addCase(getAllProducts.rejected, (state, action) => {
+				state.isLoading = false
+				state.isError = true
+				state.message = action.payload
+			})
+			.addCase(getProduct.pending, (state) => {
+				state.isLoading = true
+			})
+			.addCase(getProduct.fulfilled, (state, action) => {
+				state.isLoading = false
+				state.isSuccess = true
+				//cartItems state holds an array of objects where each object is the product along with other info as properties
+				//Here we are storing the current products as objects with the new"product" object added so we can display all the products added to the current cart. NEED TO CODE LOGIC TO HANDLE REPEAT ITEMS ADDED
+				state.products = [...action.payload]
+				console.log(action.payload)
+			})
+			.addCase(getProduct.rejected, (state, action) => {
 				state.isLoading = false
 				state.isError = true
 				state.message = action.payload
