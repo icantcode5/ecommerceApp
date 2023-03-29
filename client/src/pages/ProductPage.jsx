@@ -1,14 +1,14 @@
-import React, { useEffect } from "react"
 import { addProductToCart, reset } from "../features/cart/cartSlice"
 import styles from "../styles/ProductPage.module.css"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 
 const ProductPage = () => {
 	const dispatch = useDispatch()
 	//Grab Id from URL to display current product's info. URL id is a string.
 	let { id } = useParams()
 	id = parseInt(id)
+	const navigate = useNavigate()
 
 	const { cartItems } = useSelector((state) => state.cart)
 	console.log(cartItems)
@@ -19,8 +19,11 @@ const ProductPage = () => {
 	})[0]
 
 	function handleAddProductToCart() {
-		dispatch(addProductToCart(id))
+		dispatch(addProductToCart([id, 1]))
 		dispatch(reset())
+		//Add QTY property to Cart item added to Cart
+		//grab value from "select" element and insert it into QTY property.
+		// navigate("/cart")
 	}
 
 	return (

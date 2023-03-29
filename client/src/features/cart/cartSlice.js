@@ -1,5 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { json } from "react-router-dom"
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit"
 import cartServices from "./cartServices"
 
 const initialState = {
@@ -15,12 +14,11 @@ const initialState = {
 //GET single product to add to cart
 export const addProductToCart = createAsyncThunk(
 	"cart/addProductToCart",
-	async (id, thunkAPI) => {
+	async ([...rest], thunkAPI) => {
 		try {
-			// const [id, QTY] = rest
-			const currentCart = thunkAPI.getState().cartItems
+			const [id, QTY] = rest
 
-			return await cartServices.addProductToCart(id, currentCart)
+			return await cartServices.addProductToCart(id, QTY)
 		} catch (error) {
 			const message =
 				(error.response &&
@@ -63,13 +61,33 @@ export const cartSlice = createSlice({
 				state.isSuccess = true
 				//cartItems state holds an array of objects where each object is the product along with other info as properties
 				//Here we are storing the current products as objects with the new"product" object added so we can display all the products added to the current cart. NEED TO CODE LOGIC TO HANDLE REPEAT ITEMS ADDED
-				// state.cartItems = JSON.parse(localStorage.getItem("cart"))
-				// 	? JSON.parse(localStorage.getItem("cart"))
-				// 	: []
-				localStorage.setItem(
-					"cart",
-					JSON.stringify([...state.cartItems, ...action.payload])
-				)
+
+				//Can't call state.cartItems before it is set to anything as we can access the previous state with the "current" function, but not make any changes based on the previous state. First we need to set the state to some "data" and then we can manipulate the current state based on the incoming data from the action.payload in order to set our state to our desired "final" state.
+
+				state.cartItems = JSON.parse(localStorage.getItem("cart"))
+
+				//If there is a length then check if there is also the same item in the cart already, if so then just update it's quantity by the value of the QTY payload passed in, else add the item to the cart as a new item.
+				if (
+					state.cartItems.length &&
+					state.cartItems.some((product) => product.id === action.payload[0].id)
+				) {
+					const updatedCartItems = state.cartItems.map((product) => {
+						if (product.id === action.payload[0].id) {
+							return { ...product, QTY: (product.QTY += 1) }
+						} else {
+							return product
+						}
+					})
+
+					localStorage.setItem("cart", JSON.stringify([...updatedCartItems]))
+				} else {
+					console.log("hello from else")
+					localStorage.setItem(
+						"cart",
+						JSON.stringify([...state.cartItems, ...action.payload])
+					)
+				}
+
 				state.cartItems = JSON.parse(localStorage.getItem("cart"))
 			})
 			.addCase(addProductToCart.rejected, (state, action) => {
