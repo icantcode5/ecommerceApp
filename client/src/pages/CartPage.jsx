@@ -18,7 +18,7 @@ const CartPage = () => {
 			/>
 		)
 	})
-	console.log(currentCartItems)
+	// console.log(currentCartItems)
 
 	return (
 		<div className={styles.cartpage}>
