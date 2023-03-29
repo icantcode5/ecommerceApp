@@ -2,19 +2,20 @@ import React from "react"
 import { Link } from "react-router-dom"
 import styles from "../styles/CartItem.module.css"
 import { useDispatch, useSelector } from "react-redux"
-// import { addProductToCart } from "../features/cart/cartSlice"
+import { deleteProductFromCart } from "../features/cart/cartSlice"
 
 function CartItem(props) {
 	const dispatch = useDispatch()
+
+	function handleDeleteCartItem(id) {
+		dispatch(deleteProductFromCart(id))
+	}
 
 	return (
 		<div className={styles.cartitem}>
 			<div className={styles.cartitem__image}>
 				<Link to={`/product/${props.id}`}>
-					<img
-						src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80"
-						alt="ps5 picture"
-					/>
+					<img src={`${props.img}`} alt="ps5 picture" />
 				</Link>
 			</div>
 
@@ -31,7 +32,9 @@ function CartItem(props) {
 				<option value="4">4</option>
 			</select>
 
-			<button className={styles.cartitem__deleteBtn}>
+			<button
+				className={styles.cartitem__deleteBtn}
+				onClick={() => handleDeleteCartItem(props.id)}>
 				<i className="fas fa-trash"></i>
 			</button>
 		</div>

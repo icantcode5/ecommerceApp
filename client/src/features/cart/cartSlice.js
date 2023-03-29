@@ -1,8 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import { json } from "react-router-dom"
 import cartServices from "./cartServices"
 
 const initialState = {
-	cartItems: [],
+	cartItems: JSON.parse(localStorage.getItem("cart"))
+		? JSON.parse(localStorage.getItem("cart"))
+		: [],
 	isLoading: false,
 	isError: false,
 	isSuccess: false,
@@ -40,6 +43,15 @@ export const cartSlice = createSlice({
 			state.isSuccess = false
 			state.message = ""
 		},
+		//action.payload holds only a single argument, so if we want to pass mutliple arguments, we have to pass them in an array or object.
+		deleteProductFromCart: (state, action) => {
+			const currentCart = state.cartItems
+			const newCart = currentCart.filter((product) => {
+				return product.id !== action.payload
+			})
+			localStorage.setItem("cart", JSON.stringify(newCart))
+			state.cartItems = newCart
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -51,8 +63,14 @@ export const cartSlice = createSlice({
 				state.isSuccess = true
 				//cartItems state holds an array of objects where each object is the product along with other info as properties
 				//Here we are storing the current products as objects with the new"product" object added so we can display all the products added to the current cart. NEED TO CODE LOGIC TO HANDLE REPEAT ITEMS ADDED
-				state.cartItems = [...cartItems, ...action.payload]
-				console.log(action.payload)
+				// state.cartItems = JSON.parse(localStorage.getItem("cart"))
+				// 	? JSON.parse(localStorage.getItem("cart"))
+				// 	: []
+				localStorage.setItem(
+					"cart",
+					JSON.stringify([...state.cartItems, ...action.payload])
+				)
+				state.cartItems = JSON.parse(localStorage.getItem("cart"))
 			})
 			.addCase(addProductToCart.rejected, (state, action) => {
 				state.isLoading = false
@@ -62,5 +80,5 @@ export const cartSlice = createSlice({
 	},
 })
 
-export const { reset } = cartSlice.actions
+export const { reset, deleteProductFromCart } = cartSlice.actions
 export default cartSlice.reducer
