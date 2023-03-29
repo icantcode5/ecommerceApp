@@ -49,7 +49,6 @@ export const productsSlice = createSlice({
 				//cartItems state holds an array of objects where each object is the product along with other info as properties
 				//Here we are storing the current products as objects with the new"product" object added so we can display all the products added to the current cart. NEED TO CODE LOGIC TO HANDLE REPEAT ITEMS ADDED
 				state.products = [...action.payload]
-				console.log(action.payload)
 			})
 			.addCase(getAllProducts.rejected, (state, action) => {
 				state.isLoading = false

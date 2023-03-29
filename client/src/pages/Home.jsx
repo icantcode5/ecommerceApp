@@ -3,10 +3,13 @@ import styles from "../styles/Home.module.css"
 import Product from "../components/Product"
 import { getAllProducts, reset } from "../features/products/productsSlice"
 import { useDispatch, useSelector } from "react-redux"
+import { all } from "axios"
 
 export default function Home() {
 	const dispatch = useDispatch()
-	const { isError, products, message } = useSelector((state) => state.products)
+	const { isError, products, message, isSuccess, isLoading } = useSelector(
+		(state) => state.products
+	)
 
 	useEffect(() => {
 		dispatch(getAllProducts())
@@ -36,7 +39,9 @@ export default function Home() {
 			<h2 className={styles.home__title}>Latest Titles</h2>
 
 			<div className={styles.home__products}>
-				{allProducts ? (
+				{isLoading ? (
+					console.log("loading") //come back to this
+				) : allProducts ? (
 					allProducts
 				) : (
 					<h2>There are currently no products to select from, sorry.</h2>

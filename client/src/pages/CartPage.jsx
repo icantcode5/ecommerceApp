@@ -14,14 +14,16 @@ const CartPage = () => {
 				price={product.price}
 				description={product.description}
 				id={product.id}
+				img={product.imageurl}
 			/>
 		)
 	})
+	console.log(currentCartItems)
 
 	return (
 		<div className={styles.cartpage}>
 			<div className={styles.cartleftside}>
-				<h2>Shopping Cart</h2>
+				<h2>Cart</h2>
 
 				{currentCartItems.length ? (
 					currentCartItems
