@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === "production") {
 	app.use(express.static("./client/dist"))
 }
 
-client.connect()
+// client.connect()
 
 //TAKE A LOOK AT THE PATH OF THE HTML FILE ONCE WE ARE READY TO BUILD OUR APP AND DEPLOY IT
 if (process.env.NODE_ENV === "production") {
