@@ -6,6 +6,9 @@ import { useSelector } from "react-redux"
 const Navbar = ({ toggleSideDrawer }) => {
 	const { cartItems } = useSelector((state) => state.cart)
 
+	//prettier-ignore
+	const numberOfItemsInCart = cartItems.reduce((curr, product) => curr + product.QTY ,0)
+
 	return (
 		<nav className={styles.navbar}>
 			<div className={styles.navbar__logo}>
@@ -16,7 +19,9 @@ const Navbar = ({ toggleSideDrawer }) => {
 				<li>
 					<Link to="/cart" className={styles.cart__link}>
 						<i className="fas fa-shopping-cart"></i>
-						<span className={styles.cartlogo__badge}>{cartItems.length}</span>
+						<span className={styles.cartlogo__badge}>
+							{numberOfItemsInCart}
+						</span>
 					</Link>
 				</li>
 

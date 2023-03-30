@@ -1,29 +1,33 @@
+import { useState } from "react"
 import { addProductToCart, reset } from "../features/cart/cartSlice"
 import styles from "../styles/ProductPage.module.css"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, useNavigate } from "react-router-dom"
 
 const ProductPage = () => {
+	const [QTY, setQTY] = useState(1)
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
+	const { cartItems } = useSelector((state) => state.cart)
+	const { products } = useSelector((state) => state.products)
+
 	//Grab Id from URL to display current product's info. URL id is a string.
 	let { id } = useParams()
 	id = parseInt(id)
-	const navigate = useNavigate()
 
-	const { cartItems } = useSelector((state) => state.cart)
-	console.log(cartItems)
-	const { products } = useSelector((state) => state.products)
-
+	//set product variable to an object
 	const product = products.filter((product) => {
 		return product.id === id
 	})[0]
 
 	function handleAddProductToCart() {
-		dispatch(addProductToCart([id, 1]))
-		dispatch(reset())
-		//Add QTY property to Cart item added to Cart
-		//grab value from "select" element and insert it into QTY property.
-		// navigate("/cart")
+		dispatch(addProductToCart([id, QTY]))
+		navigate("/cart")
+	}
+
+	function handleSelectChange(event) {
+		const { value } = event.target
+		setQTY(parseInt(value))
 	}
 
 	return (
@@ -50,11 +54,12 @@ const ProductPage = () => {
 					</p>
 					<p className={styles.quantity}>
 						QTY
-						<select>
+						<select value={QTY} onChange={handleSelectChange}>
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
 							<option value="4">4</option>
+							<option value="5">5</option>
 						</select>
 					</p>
 					<p>

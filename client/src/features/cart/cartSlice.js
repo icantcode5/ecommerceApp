@@ -50,6 +50,18 @@ export const cartSlice = createSlice({
 			localStorage.setItem("cart", JSON.stringify(newCart))
 			state.cartItems = newCart
 		},
+		updateQTYInCart: (state, action) => {
+			const [id, QTY] = action.payload
+			const updateQTY = state.cartItems.map((product) => {
+				if (product.id === id) {
+					return { ...product, QTY: QTY }
+				} else {
+					return product
+				}
+			})
+			localStorage.setItem("cart", JSON.stringify(updateQTY))
+			state.cartItems = updateQTY
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -62,9 +74,7 @@ export const cartSlice = createSlice({
 				//cartItems state holds an array of objects where each object is the product along with other info as properties
 				//Here we are storing the current products as objects with the new"product" object added so we can display all the products added to the current cart. NEED TO CODE LOGIC TO HANDLE REPEAT ITEMS ADDED
 
-				//Can't call state.cartItems before it is set to anything as we can access the previous state with the "current" function, but not make any changes based on the previous state. First we need to set the state to some "data" and then we can manipulate the current state based on the incoming data from the action.payload in order to set our state to our desired "final" state.
-
-				state.cartItems = JSON.parse(localStorage.getItem("cart"))
+				//To see the current state of the cartItems, we have to use the current function from the redux toolkit, but we can't make any changes to it from the current function, but we can make changes to the current state "state.cartItems" without being able to see what's going on with console.log(state.cartItems). In this case, this is where redux dev tools come in handy and allow us to see what state changes occured. We pretty much have to keep breaking the code or getting wrong results until we get it right and the redux devtools reflects that.
 
 				//If there is a length then check if there is also the same item in the cart already, if so then just update it's quantity by the value of the QTY payload passed in, else add the item to the cart as a new item.
 				if (
@@ -73,7 +83,7 @@ export const cartSlice = createSlice({
 				) {
 					const updatedCartItems = state.cartItems.map((product) => {
 						if (product.id === action.payload[0].id) {
-							return { ...product, QTY: (product.QTY += 1) }
+							return { ...product, QTY: (product.QTY += action.payload[0].QTY) }
 						} else {
 							return product
 						}
@@ -81,7 +91,6 @@ export const cartSlice = createSlice({
 
 					localStorage.setItem("cart", JSON.stringify([...updatedCartItems]))
 				} else {
-					console.log("hello from else")
 					localStorage.setItem(
 						"cart",
 						JSON.stringify([...state.cartItems, ...action.payload])
@@ -98,5 +107,6 @@ export const cartSlice = createSlice({
 	},
 })
 
-export const { reset, deleteProductFromCart } = cartSlice.actions
+export const { reset, deleteProductFromCart, updateQTYInCart } =
+	cartSlice.actions
 export default cartSlice.reducer
