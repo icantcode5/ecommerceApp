@@ -1,14 +1,28 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import styles from "../styles/CartItem.module.css"
 import { useDispatch, useSelector } from "react-redux"
-import { deleteProductFromCart } from "../features/cart/cartSlice"
+import {
+	deleteProductFromCart,
+	updateQTYInCart,
+} from "../features/cart/cartSlice"
 
 function CartItem(props) {
 	const dispatch = useDispatch()
+	const [QTY, setQTY] = useState(props.QTY)
+
+	//prettier-ignore
+	const options = Array.from({ length: 10 }).map((element,i) => <option key={i} value={i+1}>{i+1}</option>)
 
 	function handleDeleteCartItem(id) {
 		dispatch(deleteProductFromCart(id))
+	}
+
+	function handleQTYChange(event) {
+		let { value } = event.target
+		value = parseInt(value)
+		setQTY(value)
+		dispatch(updateQTYInCart([props.id, value]))
 	}
 
 	return (
@@ -25,16 +39,18 @@ function CartItem(props) {
 
 			<p className={styles.cartitem__price}>{props.price}</p>
 
-			<select className={styles.cartitem__select}>
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
+			<select
+				value={QTY}
+				onChange={handleQTYChange}
+				className={styles.cartitem__select}
+			>
+				{options}
 			</select>
 
 			<button
 				className={styles.cartitem__deleteBtn}
-				onClick={() => handleDeleteCartItem(props.id)}>
+				onClick={() => handleDeleteCartItem(props.id)}
+			>
 				<i className="fas fa-trash"></i>
 			</button>
 		</div>

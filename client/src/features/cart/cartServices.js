@@ -9,7 +9,6 @@ const addProductToCart = async (id, QTY) => {
 	})
 
 	return productsWithQTY
-	// return response.data
 }
 
 const cartServices = {

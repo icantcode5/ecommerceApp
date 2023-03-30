@@ -3,8 +3,16 @@ import styles from "../styles/CartPage.module.css"
 import CartItem from "../components/CartItem"
 import { useSelector, useDispatch } from "react-redux"
 
+//Things to do:
+//1. PROCEED TO SETUP STRIP API TO ALLOW FOR ONLINE PAYMENTS!
+//2. Change inStock amount in DB once the user has checked out.
+
 const CartPage = () => {
 	const { cartItems } = useSelector((state) => state.cart)
+	//prettier-ignore
+	const numberOfItemsInCart = cartItems.reduce((curr, product) => curr + product.QTY ,0)
+	//prettier-ignore
+	const totalPrice = cartItems.reduce((curr, product) => curr + (product.price * product.QTY), 0)
 
 	const currentCartItems = cartItems.map((product) => {
 		return (
@@ -15,10 +23,10 @@ const CartPage = () => {
 				description={product.description}
 				id={product.id}
 				img={product.imageurl}
+				QTY={product.QTY}
 			/>
 		)
 	})
-	// console.log(currentCartItems)
 
 	return (
 		<div className={styles.cartpage}>
@@ -34,8 +42,8 @@ const CartPage = () => {
 
 			<div className={styles.cartrightside}>
 				<div className={styles.cartrightinfo}>
-					<p>Subtototal {cartItems.length} items</p>
-					<p>$4.00</p>
+					<p>Subtototal ({numberOfItemsInCart}) items</p>
+					<p>${totalPrice}</p>
 				</div>
 
 				<div>
