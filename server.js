@@ -1,5 +1,6 @@
 const express = require("express")
 const app = express()
+require("dotenv").config({ path: "./config/.env" })
 const cors = require("cors")
 const client = require("./config/database")
 const path = require("path")
@@ -7,8 +8,6 @@ const path = require("path")
 //Routes
 const userRoutes = require("./routes/users")
 const productsRoutes = require("./routes/products")
-
-require("dotenv").config({ path: "./config/.env" })
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
