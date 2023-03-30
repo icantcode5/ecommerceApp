@@ -15,17 +15,15 @@ app.use(cors())
 
 //Static Folder
 if (process.env.NODE_ENV === "production") {
-	app.use(express.static("./client/build"))
+	app.use(express.static("./client/dist"))
 }
-//comment to test dev branch
 
-//May need to connect to the client from the controller directory files as that's where we are going make requests to the postgres database from
 client.connect()
 
 //TAKE A LOOK AT THE PATH OF THE HTML FILE ONCE WE ARE READY TO BUILD OUR APP AND DEPLOY IT
 if (process.env.NODE_ENV === "production") {
 	app.get("*", (req, res) => {
-		res.sendFile(path.join(__dirname, "./client/build/index.html"))
+		res.sendFile(path.join(__dirname, "./client/dist/index.html"))
 	})
 }
 
@@ -33,6 +31,6 @@ if (process.env.NODE_ENV === "production") {
 app.use("/users", userRoutes)
 app.use("/products", productsRoutes)
 
-app.listen(5000, () => {
+app.listen(process.env.PORT, () => {
 	console.log("Server is running on Port: 5000")
 })
