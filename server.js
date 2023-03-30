@@ -1,10 +1,9 @@
 const express = require("express")
 const app = express()
+require("dotenv").config({ path: "./config/.env" })
 const cors = require("cors")
 const client = require("./config/database")
 const path = require("path")
-
-require("dotenv").config({ path: "./config/.env" })
 
 //Routes
 const userRoutes = require("./routes/users")
