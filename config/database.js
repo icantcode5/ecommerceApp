@@ -12,7 +12,7 @@ require("dotenv").config({ path: __dirname + "/.env" })
 const client = new Client({
 	host: "localhost",
 	user: "postgres",
-	port: 5001,
+	port: 5432,
 	password: process.env.DB_PASSWORD,
 	database: "shop",
 })
