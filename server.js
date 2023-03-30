@@ -4,11 +4,11 @@ const cors = require("cors")
 const client = require("./config/database")
 const path = require("path")
 
+require("dotenv").config({ path: "./config/.env" })
+
 //Routes
 const userRoutes = require("./routes/users")
 const productsRoutes = require("./routes/products")
-
-require("dotenv").config({ path: "./config/.env" })
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
