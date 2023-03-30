@@ -1,6 +1,6 @@
 const { Client } = require("pg")
 
-//This dotenv file seems to only be read from the root of the app
+// //This dotenv file seems to only be read from the root of the app
 require("dotenv").config({ path: __dirname + "/.env" })
 
 //__dirname specifies the current directory we are in AKA the folder
@@ -8,13 +8,13 @@ require("dotenv").config({ path: __dirname + "/.env" })
 //we simply tack on the file in the directory we are in, so, /.evn
 //console.log(__dirname)
 
-//normal port is 5423 but I switched it 5001 when setting up PostgreSQL
+//normal port is 5423
 const client = new Client({
-	host: "localhost",
-	user: "postgres",
+	host: process.env.DB_HOST,
+	user: process.env.DB_USER,
 	port: 5432,
 	password: process.env.DB_PASSWORD,
-	database: "shop",
+	database: process.env.DB_DB,
 })
 
 module.exports = client
