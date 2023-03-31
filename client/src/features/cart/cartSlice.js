@@ -60,7 +60,7 @@ export const cartSlice = createSlice({
 				}
 			})
 			localStorage.setItem("cart", JSON.stringify(updateQTY))
-			state.cartItems = updateQTY
+			state.cartItems = [...updateQTY]
 		},
 	},
 	extraReducers: (builder) => {
@@ -83,7 +83,8 @@ export const cartSlice = createSlice({
 				) {
 					const updatedCartItems = state.cartItems.map((product) => {
 						if (product.id === action.payload[0].id) {
-							return { ...product, QTY: (product.QTY += action.payload[0].QTY) }
+							//prettier-ignore
+							return { ...product, QTY: product.QTY + action.payload[0].QTY > 10 ? 10 : product.QTY += action.payload[0].QTY }
 						} else {
 							return product
 						}

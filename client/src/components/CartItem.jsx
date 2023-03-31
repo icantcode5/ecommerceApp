@@ -9,8 +9,6 @@ import {
 
 function CartItem(props) {
 	const dispatch = useDispatch()
-	const [QTY, setQTY] = useState(props.QTY)
-
 	//prettier-ignore
 	const options = Array.from({ length: 10 }).map((element,i) => <option key={i} value={i+1}>{i+1}</option>)
 
@@ -21,7 +19,6 @@ function CartItem(props) {
 	function handleQTYChange(event) {
 		let { value } = event.target
 		value = parseInt(value)
-		setQTY(value)
 		dispatch(updateQTYInCart([props.id, value]))
 	}
 
@@ -40,7 +37,7 @@ function CartItem(props) {
 			<p className={styles.cartitem__price}>{props.price}</p>
 
 			<select
-				value={QTY}
+				value={props.QTY}
 				onChange={handleQTYChange}
 				className={styles.cartitem__select}
 			>

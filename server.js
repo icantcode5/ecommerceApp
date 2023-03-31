@@ -2,7 +2,7 @@ const express = require("express")
 const app = express()
 require("dotenv").config({ path: "./config/.env" })
 const cors = require("cors")
-const client = require("./config/database")
+const { connectTODB } = require("./config/database")
 const path = require("path")
 
 //Routes
@@ -13,19 +13,20 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors())
 
-//Static Folder
-// if (process.env.NODE_ENV === "production") {
-// 	app.use(express.static("./client/dist"))
-// }
+// Static Folder
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static("./client/dist"))
+}
 
-// client.connect()
+//Connect to postgreSQL
+connectTODB()
 
-//TAKE A LOOK AT THE PATH OF THE HTML FILE ONCE WE ARE READY TO BUILD OUR APP AND DEPLOY IT
-// if (process.env.NODE_ENV === "production") {
-// 	app.get("*", (req, res) => {
-// 		res.sendFile(path.join(__dirname, "./client/dist/index.html"))
-// 	})
-// }
+// TAKE A LOOK AT THE PATH OF THE HTML FILE ONCE WE ARE READY TO BUILD OUR APP AND DEPLOY IT
+if (process.env.NODE_ENV === "production") {
+	app.get("*", (req, res) => {
+		res.sendFile(path.join(__dirname, "./client/dist/index.html"))
+	})
+}
 
 //Routes
 app.use("/", userRoutes)
