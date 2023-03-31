@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 //Routes
-app.use("/users", userRoutes)
+app.use("/", userRoutes)
 app.use("/products", productsRoutes)
 
 app.listen(process.env.PORT, () => {
