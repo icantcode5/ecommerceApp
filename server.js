@@ -14,9 +14,9 @@ app.use(express.json())
 app.use(cors())
 
 //Static Folder
-if (process.env.NODE_ENV === "production") {
-	app.use(express.static("./client/dist"))
-}
+// if (process.env.NODE_ENV === "production") {
+// 	app.use(express.static("./client/dist"))
+// }
 
 // client.connect()
 
