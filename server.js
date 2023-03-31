@@ -21,11 +21,11 @@ if (process.env.NODE_ENV === "production") {
 // client.connect()
 
 //TAKE A LOOK AT THE PATH OF THE HTML FILE ONCE WE ARE READY TO BUILD OUR APP AND DEPLOY IT
-if (process.env.NODE_ENV === "production") {
-	app.get("*", (req, res) => {
-		res.sendFile(path.join(__dirname, "./client/dist/index.html"))
-	})
-}
+// if (process.env.NODE_ENV === "production") {
+// 	app.get("*", (req, res) => {
+// 		res.sendFile(path.join(__dirname, "./client/dist/index.html"))
+// 	})
+// }
 
 //Routes
 app.use("/", userRoutes)
