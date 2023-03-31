@@ -7,6 +7,7 @@ import ProductPage from "./pages/ProductPage"
 import Navbar from "./components/Navbar"
 import Backdrop from "./components/Backdrop"
 import SideDrawer from "./components/SideDrawer"
+import Test from "./pages/Test"
 
 function App() {
 	const [sideToggle, setSideToggle] = useState(false)
@@ -25,7 +26,7 @@ function App() {
 			<SideDrawer show={sideToggle} hideSideDrawer={hideSideDrawer} />
 			<Backdrop show={sideToggle} hideSideDrawer={hideSideDrawer} />
 			<Routes>
-				{/* <Route path="/" element={<Home />} /> */}
+				<Route path="/" element={<Test />} />
 				<Route path="/products" element={<Home />} />
 				<Route path="/products/:id" element={<ProductPage />} />
 				<Route path="/cart" element={<CartPage />} />
