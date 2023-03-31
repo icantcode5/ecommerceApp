@@ -1,4 +1,4 @@
-const client = require("../config/database")
+const client = require("../config/clientConnect")
 
 //GET all products
 const getAllProducts = async (request, response) => {

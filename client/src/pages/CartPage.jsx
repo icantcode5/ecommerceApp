@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux"
 
 const CartPage = () => {
 	const { cartItems } = useSelector((state) => state.cart)
+	console.log(cartItems)
 	//prettier-ignore
 	const numberOfItemsInCart = cartItems.reduce((curr, product) => curr + product.QTY ,0)
 	//prettier-ignore
@@ -17,6 +18,7 @@ const CartPage = () => {
 	const currentCartItems = cartItems.map((product) => {
 		return (
 			<CartItem
+				product={product}
 				key={product.id}
 				name={product.name}
 				price={product.price}
