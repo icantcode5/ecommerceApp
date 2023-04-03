@@ -5,11 +5,10 @@ import { useSelector, useDispatch } from "react-redux"
 
 //Things to do:
 //1. PROCEED TO SETUP STRIP API TO ALLOW FOR ONLINE PAYMENTS!
-//2. Change inStock amount in DB once the user has checked out.
+//2. SET UP ENV VARIABLES FOR API ROUTES IF APP IS IN PROD OR DEV MODE
 
 const CartPage = () => {
 	const { cartItems } = useSelector((state) => state.cart)
-	console.log(cartItems)
 	//prettier-ignore
 	const numberOfItemsInCart = cartItems.reduce((curr, product) => curr + product.QTY ,0)
 	//prettier-ignore
