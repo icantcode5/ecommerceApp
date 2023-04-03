@@ -7,6 +7,7 @@ const getAllProducts = async (request, response) => {
 	try {
 		const products = await client.query(allProductsQuery)
 		response.json(products.rows)
+		// client.end()
 	} catch (error) {
 		console.log("Error is " + error)
 	}
@@ -21,6 +22,7 @@ const getProductById = async (request, response) => {
 	try {
 		const products = await client.query(allProductsQuery, [id])
 		response.json(products.rows)
+		// client.end()
 	} catch (error) {
 		console.log(error)
 	}

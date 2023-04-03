@@ -18,7 +18,12 @@ function Test() {
 		getMessage()
 	}, [])
 
-	return <h1>{text}</h1>
+	return (
+		<>
+			<h1>{text}</h1>
+			<p>This is the test page!</p>
+		</>
+	)
 }
 
 export default Test
