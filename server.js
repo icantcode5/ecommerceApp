@@ -25,7 +25,6 @@ app.use(cors())
 app.use("/", userRoutes)
 app.use("/products", productsRoutes)
 
-// TAKE A LOOK AT THE PATH OF THE HTML FILE ONCE WE ARE READY TO BUILD OUR APP AND DEPLOY IT
 if (process.env.NODE_ENV === "production") {
 	app.get("*", (req, res) => {
 		res.sendFile(path.join(__dirname, "./client/dist/index.html"))
