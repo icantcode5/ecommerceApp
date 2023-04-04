@@ -30,7 +30,7 @@ const CartPage = () => {
 	async function handleCheckout() {
 		let URL = null
 		//prettier-ignore
-		import.meta.env.DEV ? URL = "http://localhost:5000/payment/create" : URL =  "https://ecommerceapp-w6n9.onrender.com/"
+		import.meta.env.DEV ? URL = "http://localhost:5000/payment/create" : URL =  "https://ecommerceapp-w6n9.onrender.com/payment/create"
 		try {
 			const stripe = await getStripe()
 			//prettier-ignore
