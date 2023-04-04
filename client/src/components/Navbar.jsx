@@ -13,7 +13,7 @@ const Navbar = ({ toggleSideDrawer }) => {
 		<nav className={styles.navbar}>
 			<div className={styles.navbar__logo}>
 				<h2>
-					<Link to="/">PERN Shopping Cart</Link>
+					<Link to="/">TechReal</Link>
 				</h2>
 			</div>
 
