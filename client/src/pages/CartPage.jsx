@@ -28,10 +28,13 @@ const CartPage = () => {
 	})
 
 	async function handleCheckout() {
+		let URL = null
+		//prettier-ignore
+		import.meta.env.DEV ? URL = "http://localhost:5000/payment/create" : URL =  "https://ecommerceapp-w6n9.onrender.com/"
 		try {
 			const stripe = await getStripe()
 			//prettier-ignore
-			const response = await axios.post("http://localhost:5000/payment/create", cartItems)
+			const response = await axios.post(URL, cartItems)
 			stripe.redirectToCheckout({ sessionId: response.data.id })
 		} catch (error) {
 			console.log(error)
