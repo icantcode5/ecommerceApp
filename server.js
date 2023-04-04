@@ -8,6 +8,7 @@ const path = require("path")
 //Routes
 const userRoutes = require("./routes/users")
 const productsRoutes = require("./routes/products")
+const paymentRoutes = require("./routes/payment")
 
 //Connect to postgreSQL
 connectTODB()
@@ -24,6 +25,7 @@ app.use(cors())
 //Routes
 app.use("/", userRoutes)
 app.use("/products", productsRoutes)
+app.use("/payment", paymentRoutes)
 
 if (process.env.NODE_ENV === "production") {
 	app.get("*", (req, res) => {

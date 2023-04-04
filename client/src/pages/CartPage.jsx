@@ -2,10 +2,8 @@ import React from "react"
 import styles from "../styles/CartPage.module.css"
 import CartItem from "../components/CartItem"
 import { useSelector, useDispatch } from "react-redux"
-
-//Things to do:
-//1. PROCEED TO SETUP STRIP API TO ALLOW FOR ONLINE PAYMENTS!
-//2. SET UP ENV VARIABLES FOR API ROUTES IF APP IS IN PROD OR DEV MODE
+import getStripe from "../utilities/getStrip"
+import axios from "axios"
 
 const CartPage = () => {
 	const { cartItems } = useSelector((state) => state.cart)
@@ -29,6 +27,17 @@ const CartPage = () => {
 		)
 	})
 
+	async function handleCheckout() {
+		try {
+			const stripe = await getStripe()
+			//prettier-ignore
+			const response = await axios.post("http://localhost:5000/payment/create", cartItems)
+			stripe.redirectToCheckout({ sessionId: response.data.id })
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
 	return (
 		<div className={styles.cartpage}>
 			<div className={styles.cartleftside}>
@@ -48,7 +57,7 @@ const CartPage = () => {
 				</div>
 
 				<div>
-					<button>Proceed to Checkout</button>
+					<button onClick={handleCheckout}>Pay with Stripe</button>
 				</div>
 			</div>
 		</div>
