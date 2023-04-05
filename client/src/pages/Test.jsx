@@ -20,7 +20,6 @@ function Test() {
 
 	return (
 		<>
-			<h1>{text}</h1>
 			<p>This is the test page!</p>
 		</>
 	)
