@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import productsServices from "./productsServices"
 
 const initialState = {
-	products: [],
+	products: JSON.parse(localStorage.getItem("products")) || [],
 	isLoading: false,
 	isSuccess: false,
 	isError: false,
@@ -47,8 +47,13 @@ export const productsSlice = createSlice({
 				state.isLoading = false
 				state.isSuccess = true
 				//cartItems state holds an array of objects where each object is the product along with other info as properties
-				//Here we are storing the current products as objects with the new"product" object added so we can display all the products added to the current cart. NEED TO CODE LOGIC TO HANDLE REPEAT ITEMS ADDED
-				state.products = [...action.payload]
+				//Here we are storing the current products as objects with the new "product" object added so we can display all the products added to the current cart.
+				if (!localStorage.getItem("products")) {
+					localStorage.setItem("products", JSON.stringify(action.payload))
+					state.products = JSON.parse(localStorage.getItem("products"))
+				} else {
+					state.products = JSON.parse(localStorage.getItem("products"))
+				}
 			})
 			.addCase(getAllProducts.rejected, (state, action) => {
 				state.isLoading = false
@@ -58,5 +63,5 @@ export const productsSlice = createSlice({
 	},
 })
 
-export const { reset } = productsSlice.actions
+export const { reset, getProductsState } = productsSlice.actions
 export default productsSlice.reducer

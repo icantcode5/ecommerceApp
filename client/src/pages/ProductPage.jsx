@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { addProductToCart, reset } from "../features/cart/cartSlice"
 import styles from "../styles/ProductPage.module.css"
 import { useDispatch, useSelector } from "react-redux"
@@ -8,14 +8,14 @@ const ProductPage = () => {
 	const [QTY, setQTY] = useState(1)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
-	const { cartItems } = useSelector((state) => state.cart)
+
 	const { products } = useSelector((state) => state.products)
 
 	//Grab Id from URL to display current product's info. URL id is a string.
 	let { id } = useParams()
 	id = parseInt(id)
 
-	//set product variable to an object
+	//set product variable to product object
 	const product = products.filter((product) => {
 		return product.id === id
 	})[0]

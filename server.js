@@ -2,7 +2,8 @@ const express = require("express")
 const app = express()
 require("dotenv").config({ path: "./config/.env" })
 const cors = require("cors")
-const { connectTODB } = require("./config/database")
+// const { connectTODB } = require("./config/database")
+// const client = require("./config/database")
 const path = require("path")
 
 //Routes
@@ -11,7 +12,7 @@ const productsRoutes = require("./routes/products")
 const paymentRoutes = require("./routes/payment")
 
 //Connect to postgreSQL
-connectTODB()
+// client.connect()
 
 // Static Folder
 if (process.env.NODE_ENV === "production") {
