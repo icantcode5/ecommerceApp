@@ -3,7 +3,6 @@ import styles from "../styles/Home.module.css"
 import Product from "../components/Product"
 import { getAllProducts, reset } from "../features/products/productsSlice"
 import { useDispatch, useSelector } from "react-redux"
-import { all } from "axios"
 
 export default function Home() {
 	const dispatch = useDispatch()
@@ -12,7 +11,9 @@ export default function Home() {
 	)
 
 	useEffect(() => {
-		dispatch(getAllProducts())
+		if (!products.length) {
+			dispatch(getAllProducts())
+		}
 
 		if (isError) {
 			console.log(message)
