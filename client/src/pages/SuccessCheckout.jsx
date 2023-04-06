@@ -27,7 +27,7 @@ const SuccessCheckout = () => {
 				<FontAwesomeIcon icon={faCircleCheck} color="green" size="xl" />
 				<p>Thank You For You Order!</p>
 				<span>Check your email inbox for the receipt.</span>
-				<Link to="/products">Continue Shopping</Link>
+				<Link to="/">Continue Shopping</Link>
 			</div>
 		</div>
 	)

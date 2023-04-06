@@ -27,8 +27,7 @@ function App() {
 			<SideDrawer show={sideToggle} hideSideDrawer={hideSideDrawer} />
 			<Backdrop show={sideToggle} hideSideDrawer={hideSideDrawer} />
 			<Routes>
-				<Route path="/" element={<Test />} />
-				<Route path="/products" element={<Home />} />
+				<Route path="/" element={<Home />} />
 				<Route path="/products/:id" element={<ProductPage />} />
 				<Route path="/cart" element={<CartPage />} />
 				<Route path="/success" element={<SuccessCheckout />} />

@@ -28,7 +28,7 @@ const Navbar = ({ toggleSideDrawer }) => {
 				</li>
 
 				<li>
-					<Link to="/products">Shop</Link>
+					<Link to="/">Shop</Link>
 				</li>
 			</ul>
 

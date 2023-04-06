@@ -29,7 +29,7 @@ module.exports = {
 						quantity: product.QTY,
 					}
 				}),
-				success_url: `${req.headers.origin}/success`,
+				success_url: `${req.headers.origin}/success=true`,
 				cancel_url: `${req.headers.origin}/cart`,
 			}
 
