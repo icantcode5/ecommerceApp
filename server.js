@@ -25,12 +25,6 @@ app.use("/", userRoutes)
 app.use("/products", productsRoutes)
 app.use("/payment", paymentRoutes)
 
-// if (process.env.NODE_ENV === "production") {
-// 	app.get("*", (req, res) => {
-// 		res.sendFile(path.join(__dirname, "./client/dist/index.html"))
-// 	})
-// }
-
 app.listen(process.env.PORT, () => {
 	console.log("Server is running on Port: 5000")
 })
