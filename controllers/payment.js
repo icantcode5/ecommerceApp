@@ -42,6 +42,6 @@ module.exports = {
 
 	getSuccessPage: async (req, res) => {
 		console.log("getSuccessPage hit!!!")
-		res.redirect(`${req.headers.origin}/success`)
+		res.redirect("/success")
 	},
 }
