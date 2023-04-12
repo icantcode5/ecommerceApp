@@ -29,7 +29,7 @@ module.exports = {
 						quantity: product.QTY,
 					}
 				}),
-				success_url: `${req.headers.origin}/success=true`,
+				success_url: `${req.headers.origin}/payment/success`,
 				cancel_url: `${req.headers.origin}/cart`,
 			}
 
@@ -38,5 +38,10 @@ module.exports = {
 		} catch (error) {
 			console.log(error.message)
 		}
+	},
+
+	getSuccessPage: async (req, res) => {
+		console.log("getSuccessPage hit!!!")
+		res.redirect(`${req.headers.origin}/success`)
 	},
 }
