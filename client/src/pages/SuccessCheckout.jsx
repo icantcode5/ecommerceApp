@@ -13,17 +13,18 @@ const SuccessCheckout = () => {
 	const [getMessage, useGetMessage] = useState("")
 
 	useEffect(() => {
-		// const getSuccessPage = async (req, res) => {
-		// 	const response = await axios.get("http://localhost:5000/payment/success")
-		// 	console.log(response.data)
-		// }
+		const getSuccessPage = async (req, res) => {
+			//prettier-ignore
+			const response = await axios.get("https://ecommerceapp-w6n9.onrender.com/payment/success/")
+			console.log(response.data)
+		}
 
 		confettiShow()
 		const timer = setTimeout(() => {
 			confettiShow()
 		}, 250)
 
-		// getSuccessPage()
+		getSuccessPage()
 		dispatch(resetCart())
 		return () => clearTimeout(timer)
 	}, [])
