@@ -1,4 +1,5 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
+import axios from "axios"
 import styles from "../styles/SuccessCheckout.module.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons"
@@ -9,17 +10,22 @@ import { resetCart } from "../features/cart/cartSlice"
 
 const SuccessCheckout = () => {
 	const dispatch = useDispatch()
+	const [getMessage, useGetMessage] = useState("")
 
 	useEffect(() => {
+		// const getSuccessPage = async (req, res) => {
+		// 	const response = await axios.get("http://localhost:5000/payment/success")
+		// 	console.log(response.data)
+		// }
+
 		confettiShow()
-		setTimeout(() => {
+		const timer = setTimeout(() => {
 			confettiShow()
 		}, 250)
-		setTimeout(() => {
-			confettiShow()
-		}, 500)
 
+		// getSuccessPage()
 		dispatch(resetCart())
+		return () => clearTimeout(timer)
 	}, [])
 	return (
 		<div className={styles.container}>
