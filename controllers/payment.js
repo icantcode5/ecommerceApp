@@ -1,7 +1,12 @@
 const Stripe = require("stripe")
 //prettier-ignore
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
-// require("dotenv").config({ path: "./config/.env" })
+const express = require("express")
+const app = express()
+
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static("./client/dist"))
+}
 
 module.exports = {
 	checkoutCart: async (req, res) => {
@@ -36,7 +41,7 @@ module.exports = {
 						quantity: product.QTY,
 					}
 				}),
-				success_url: `${domain}/payment/success/`,
+				success_url: `${domain}`,
 				cancel_url: `${domain}/cart`,
 			}
 
