@@ -1,9 +1,16 @@
 const Stripe = require("stripe")
 //prettier-ignore
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+// require("dotenv").config({ path: "./config/.env" })
 
 module.exports = {
 	checkoutCart: async (req, res) => {
+		let domain
+		if (process.env.NODE_ENV === "production") {
+			domain = "https://ecommerceapp-w6n9.onrender.com"
+		} else {
+			domain = "http://localhost:5173"
+		}
 		const cartItems = req.body
 		try {
 			const data = {
@@ -29,8 +36,8 @@ module.exports = {
 						quantity: product.QTY,
 					}
 				}),
-				success_url: `${req.headers.origin}/payment/success`,
-				cancel_url: `${req.headers.origin}/cart`,
+				success_url: `${domain}/payment/success/`,
+				cancel_url: `${domain}/cart`,
 			}
 
 			const session = await stripe.checkout.sessions.create(data)
@@ -42,6 +49,6 @@ module.exports = {
 
 	getSuccessPage: async (req, res) => {
 		console.log("getSuccessPage hit!!!")
-		res.redirect("/success")
+		res.json({ message: "Successfully checked out!!!" })
 	},
 }
