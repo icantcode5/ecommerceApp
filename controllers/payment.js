@@ -41,7 +41,7 @@ module.exports = {
 						quantity: product.QTY,
 					}
 				}),
-				success_url: `${domain}/cart`,
+				success_url: `${domain}`,
 				cancel_url: `${domain}/cart`,
 			}
 
