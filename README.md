@@ -14,3 +14,9 @@ A functional ecommerce application where users can buy different pieces of tech.
 4. Create a Stripe account and add the public Stripe api key to your frontend .env file and the private Stripe api key to your backend .env file. - https://dashboard.stripe.com/test/dashboard
 5. In the root directory run `npm run dev` to get the server up and running on your selected port.
 6. In the root directory, cd into the client folder and run `npm run dev` to get your frontend running on port 5173.
+
+## Currently Working On
+
+1. Integrating a Successful checkout page after making a purchase through Stripe instead of just redirecting to the Home products page.
+2. Showing an item being out of stock
+3. Filtering items based on type of tech looking for
